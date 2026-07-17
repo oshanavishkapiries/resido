@@ -1,0 +1,6 @@
+{
+  "name": "Resido",
+  "description": "Resido is a property marketplace app for Sri Lanka where users can Buy, Rent, or Post properties.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
