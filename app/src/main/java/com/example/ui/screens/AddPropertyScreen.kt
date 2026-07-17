@@ -71,6 +71,19 @@ fun AddPropertyScreen(navController: NavController, propertyId: String? = null) 
 
     val scrollState = rememberScrollState()
 
+    val fieldColors = OutlinedTextFieldDefaults.colors(
+        focusedTextColor = ResidoDarkNavy,
+        unfocusedTextColor = ResidoDarkNavy,
+        focusedBorderColor = ResidoBlue,
+        unfocusedBorderColor = Color.LightGray,
+        focusedContainerColor = Color.White,
+        unfocusedContainerColor = Color.White,
+        focusedLabelColor = ResidoBlue,
+        unfocusedLabelColor = ResidoTextSecondary,
+        focusedPlaceholderColor = ResidoTextSecondary,
+        unfocusedPlaceholderColor = ResidoTextSecondary
+    )
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -165,7 +178,8 @@ fun AddPropertyScreen(navController: NavController, propertyId: String? = null) 
                 label = { Text("Property Title") },
                 placeholder = { Text("e.g. Modern 3BR Villa with Pool") },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(14.dp)
+                shape = RoundedCornerShape(14.dp),
+                colors = fieldColors
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -178,7 +192,8 @@ fun AddPropertyScreen(navController: NavController, propertyId: String? = null) 
                 placeholder = { Text("e.g. 45000000") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(14.dp)
+                shape = RoundedCornerShape(14.dp),
+                colors = fieldColors
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -190,7 +205,8 @@ fun AddPropertyScreen(navController: NavController, propertyId: String? = null) 
                 label = { Text("Street Address") },
                 placeholder = { Text("e.g. Galle Road, Colombo 03") },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(14.dp)
+                shape = RoundedCornerShape(14.dp),
+                colors = fieldColors
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -203,7 +219,8 @@ fun AddPropertyScreen(navController: NavController, propertyId: String? = null) 
                     label = { Text("Beds") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(14.dp)
+                    shape = RoundedCornerShape(14.dp),
+                    colors = fieldColors
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 OutlinedTextField(
@@ -212,7 +229,8 @@ fun AddPropertyScreen(navController: NavController, propertyId: String? = null) 
                     label = { Text("Baths") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(14.dp)
+                    shape = RoundedCornerShape(14.dp),
+                    colors = fieldColors
                 )
             }
 
@@ -225,7 +243,8 @@ fun AddPropertyScreen(navController: NavController, propertyId: String? = null) 
                 label = { Text("Total Area (Sqft)") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(14.dp)
+                shape = RoundedCornerShape(14.dp),
+                colors = fieldColors
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -238,7 +257,8 @@ fun AddPropertyScreen(navController: NavController, propertyId: String? = null) 
                 placeholder = { Text("Write about features, neighborhood, proximity to schools...") },
                 modifier = Modifier.fillMaxWidth().height(120.dp),
                 shape = RoundedCornerShape(14.dp),
-                maxLines = 4
+                maxLines = 4,
+                colors = fieldColors
             )
 
             Spacer(modifier = Modifier.height(28.dp))

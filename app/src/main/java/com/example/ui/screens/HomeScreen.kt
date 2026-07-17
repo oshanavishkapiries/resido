@@ -503,11 +503,11 @@ fun HomeTabContent(
             }
         }
 
-        // 2. Hero Banner Section (Dark image overlay background)
+        // 2. Hero Banner Section (Premium redesigned hero)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(290.dp)
+                .height(350.dp)
         ) {
             // Unsplash house background
             AsyncImage(
@@ -517,13 +517,17 @@ fun HomeTabContent(
                 contentScale = ContentScale.Crop
             )
 
-            // Dark overlay brush to let white texts pop elegantly
+            // Dynamic blue/navy gradient overlay for visual depth and premium contrast
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(
                         Brush.verticalGradient(
-                            colors = listOf(Color.Black.copy(alpha = 0.5f), Color.Black.copy(alpha = 0.75f))
+                            colors = listOf(
+                                Color(0xFF1B2A4A).copy(alpha = 0.35f), // ResidoDarkNavy alpha 0.35
+                                Color(0xFF1B2A4A).copy(alpha = 0.75f), // ResidoDarkNavy transition
+                                Color(0xFF172554).copy(alpha = 0.95f)  // Deepest blue-navy at bottom
+                            )
                         )
                     )
             )
@@ -532,70 +536,117 @@ fun HomeTabContent(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(20.dp),
+                    .padding(horizontal = 24.dp, vertical = 20.dp),
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = "Explore Property In Sri Lanka",
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Black,
-                    color = Color.White,
-                    letterSpacing = (-0.5).sp
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = "Find premium houses, lands, and condos easily",
-                    fontSize = 13.sp,
-                    color = Color.White.copy(alpha = 0.8f)
-                )
-
-                Spacer(modifier = Modifier.height(18.dp))
-
-                // Three pill-shaped toggle buttons: Buy / Rent / Post Property
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    // Buy Button
-                    PillToggle(
-                        label = "Buy 💲",
-                        isSelected = searchContextType == "BUY",
-                        onClick = { searchContextType = "BUY" },
-                        modifier = Modifier.weight(1f)
+                // Header Group
+                Column {
+                    Text(
+                        text = "PREMIUM REAL ESTATE",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Color(0xFF93C5FD), // Light blue tonal accent
+                        letterSpacing = 1.5.sp
                     )
-
-                    // Rent Button
-                    PillToggle(
-                        label = "Rent 🔑",
-                        isSelected = searchContextType == "RENT",
-                        onClick = { searchContextType = "RENT" },
-                        modifier = Modifier.weight(1f)
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        text = "Explore Property In Sri Lanka",
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Black,
+                        color = Color.White,
+                        letterSpacing = (-0.5).sp,
+                        lineHeight = 30.sp
                     )
-
-                    // Post Property Button (Phase 3 navigation)
-                    PillToggle(
-                        label = "Post Property 🏠",
-                        isSelected = false,
-                        onClick = {
-                            navController.navigate("add_property")
-                        },
-                        modifier = Modifier.weight(1.3f),
-                        accentColor = ResidoAccent
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Find premium houses, lands, and condos easily",
+                        fontSize = 13.sp,
+                        color = Color.White.copy(alpha = 0.85f)
                     )
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(22.dp))
+
+                // Cohesive, elevated Segmented Control container
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Color(0xFF0F172A).copy(alpha = 0.45f))
+                        .border(1.dp, Color.White.copy(alpha = 0.15f), RoundedCornerShape(12.dp))
+                        .padding(4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    // Segment: Buy
+                    Box(
+                        modifier = Modifier
+                            .weight(1.3f)
+                            .fillMaxHeight()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(if (searchContextType == "BUY") Color.White else Color.Transparent)
+                            .clickable { searchContextType = "BUY" },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Buy 💲",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = if (searchContextType == "BUY") ResidoDarkNavy else Color.White.copy(alpha = 0.9f)
+                        )
+                    }
+
+                    // Segment: Rent
+                    Box(
+                        modifier = Modifier
+                            .weight(1.3f)
+                            .fillMaxHeight()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(if (searchContextType == "RENT") Color.White else Color.Transparent)
+                            .clickable { searchContextType = "RENT" },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Rent 🔑",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = if (searchContextType == "RENT") ResidoDarkNavy else Color.White.copy(alpha = 0.9f)
+                        )
+                    }
+
+                    // Segment: Post Property
+                    Box(
+                        modifier = Modifier
+                            .weight(1.7f)
+                            .fillMaxHeight()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(ResidoAccent)
+                            .clickable { navController.navigate("add_property") },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Post Property 🏠",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(18.dp))
 
                 // Dropdowns side-by-side
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     // City Dropdown Selector
                     Box(modifier = Modifier.weight(1f)) {
                         DropdownSelector(
                             label = selectedCityDropdown,
                             title = "Select City",
+                            icon = Icons.Default.LocationOn,
                             onClick = { cityMenuExpanded = true }
                         )
                         DropdownMenu(
@@ -605,7 +656,7 @@ fun HomeTabContent(
                         ) {
                             cities.forEach { city ->
                                 DropdownMenuItem(
-                                    text = { Text(city, fontWeight = FontWeight.Bold) },
+                                    text = { Text(city, fontWeight = FontWeight.Bold, color = ResidoDarkNavy) },
                                     onClick = {
                                         selectedCityDropdown = city
                                         cityMenuExpanded = false
@@ -620,6 +671,7 @@ fun HomeTabContent(
                         DropdownSelector(
                             label = selectedCategoryDropdown,
                             title = "Select Category",
+                            icon = Icons.Default.Home,
                             onClick = { categoryMenuExpanded = true }
                         )
                         DropdownMenu(
@@ -629,7 +681,7 @@ fun HomeTabContent(
                         ) {
                             categories.forEach { cat ->
                                 DropdownMenuItem(
-                                    text = { Text(cat, fontWeight = FontWeight.Bold) },
+                                    text = { Text(cat, fontWeight = FontWeight.Bold, color = ResidoDarkNavy) },
                                     onClick = {
                                         selectedCategoryDropdown = cat
                                         categoryMenuExpanded = false
@@ -640,24 +692,33 @@ fun HomeTabContent(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(18.dp))
 
-                // Full-width Search Properties Button
-                Button(
-                    onClick = {
-                        navController.navigate("property_listing?city=$selectedCityDropdown&category=$selectedCategoryDropdown&type=$searchContextType")
-                    },
+                // Full-width Search Properties Button with a rich Blue Gradient
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(50.dp)
-                        .shadow(4.dp, RoundedCornerShape(12.dp)),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = ResidoBlue)
+                        .height(52.dp)
+                        .shadow(6.dp, RoundedCornerShape(12.dp))
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(
+                            Brush.horizontalGradient(
+                                colors = listOf(ResidoBlue, Color(0xFF1D4ED8))
+                            )
+                        )
+                        .clickable {
+                            navController.navigate("property_listing?city=$selectedCityDropdown&category=$selectedCategoryDropdown&type=$searchContextType")
+                        },
+                    contentAlignment = Alignment.Center
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
                         Icon(imageVector = Icons.Default.Search, contentDescription = "Search", tint = Color.White)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("Search Properties", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text("Search Properties", fontWeight = FontWeight.ExtraBold, fontSize = 15.sp, color = Color.White, letterSpacing = 0.5.sp)
                     }
                 }
             }
@@ -847,29 +908,57 @@ fun PillToggle(
 fun DropdownSelector(
     label: String,
     title: String,
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
     onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
+            .height(52.dp)
+            .shadow(4.dp, RoundedCornerShape(12.dp))
             .clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.2f)),
-        border = androidx.compose.foundation.BorderStroke(1.dp, Color.White.copy(alpha = 0.3f))
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(verticalArrangement = Arrangement.Center) {
-                Text(text = title, fontSize = 9.sp, color = Color.White.copy(alpha = 0.6f))
-                Text(text = label, fontSize = 13.sp, fontWeight = FontWeight.Black, color = Color.White, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = ResidoBlue,
+                modifier = Modifier.size(20.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = title,
+                    fontSize = 10.sp,
+                    color = ResidoTextSecondary,
+                    fontWeight = FontWeight.Medium
+                )
+                Text(
+                    text = label,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = ResidoDarkNavy,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
-            Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = "Dropdown", tint = Color.White)
+            Icon(
+                imageVector = Icons.Default.ArrowDropDown,
+                contentDescription = "Dropdown Indicator",
+                tint = ResidoTextSecondary,
+                modifier = Modifier.size(22.dp)
+            )
         }
     }
 }
