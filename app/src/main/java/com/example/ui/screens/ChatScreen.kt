@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.data.Conversation
-import com.example.data.Message
+import com.example.data.models.Conversation
+import com.example.data.models.Message
 import com.example.data.ResidoServiceLocator
 import com.example.ui.theme.*
 

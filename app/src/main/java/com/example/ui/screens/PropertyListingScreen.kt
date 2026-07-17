@@ -33,7 +33,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.data.Property
+import com.example.data.models.Property
 import com.example.data.ResidoServiceLocator
 import com.example.ui.theme.ResidoAccent
 import com.example.ui.theme.ResidoBackground

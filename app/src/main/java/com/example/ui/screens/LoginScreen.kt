@@ -55,7 +55,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.data.ResidoServiceLocator
-import com.example.data.User
+import com.example.data.models.User
 import com.example.ui.theme.ResidoBackground
 import com.example.ui.theme.ResidoBlue
 import com.example.ui.theme.ResidoDarkNavy

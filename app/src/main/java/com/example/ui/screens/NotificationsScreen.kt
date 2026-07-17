@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.data.NotificationItem
+import com.example.data.models.NotificationItem
 import com.example.data.ResidoServiceLocator
 import com.example.ui.theme.ResidoBackground
 import com.example.ui.theme.ResidoBlue

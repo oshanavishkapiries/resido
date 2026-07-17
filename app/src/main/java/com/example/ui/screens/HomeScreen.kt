@@ -45,9 +45,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.data.Property
+import com.example.data.models.Property
 import com.example.data.ResidoServiceLocator
-import com.example.data.User
+import com.example.data.models.User
 import com.example.ui.theme.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -1010,7 +1010,7 @@ fun CityCard(city: CityData, modifier: Modifier = Modifier) {
 @Composable
 fun SearchMapTabContent(
     properties: List<Property>,
-    propertyRepository: com.example.data.PropertyRepository,
+    propertyRepository: com.example.data.repository.PropertyRepository,
     navController: NavController
 ) {
     val context = LocalContext.current
@@ -1693,7 +1693,7 @@ fun MessagesTabContent(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileTabContent(currentUser: User?, userRepository: com.example.data.UserRepository, navController: NavController) {
+fun ProfileTabContent(currentUser: User?, userRepository: com.example.data.repository.UserRepository, navController: NavController) {
     val context = LocalContext.current
 
     var isEditing by remember { mutableStateOf(false) }

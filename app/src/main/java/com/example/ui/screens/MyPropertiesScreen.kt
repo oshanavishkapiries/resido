@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.data.Property
+import com.example.data.models.Property
 import com.example.data.ResidoServiceLocator
 import com.example.ui.theme.*
 
