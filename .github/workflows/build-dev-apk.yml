@@ -52,13 +52,15 @@ jobs:
             echo "No debug.keystore.base64 found, standard default build debug key will be used"
           fi
 
-      # Step 6: Build with Gradle
-      - name: Build Debug APK
+      # Step 6: Set up Gradle
+      - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          arguments: :app:assembleDebug
 
-      # Step 7: Find and Verify APK Output
+      # Step 7: Build with Gradle
+      - name: Build Debug APK
+        run: gradle :app:assembleDebug --no-daemon
+
+      # Step 8: Find and Verify APK Output
       - name: Verify APK Generation
         run: |
           APK_PATH=$(find app/build/outputs/apk/debug -name "*.apk" | head -n 1)
@@ -70,7 +72,7 @@ jobs:
             echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
           fi
 
-      # Step 8: Upload the output APK as a build artifact
+      # Step 9: Upload the output APK as a build artifact
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
         with:
