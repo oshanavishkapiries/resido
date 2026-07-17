@@ -3,10 +3,10 @@ name: Build Development APK
 on:
   push:
     branches:
-      - build
+      - main
   pull_request:
     branches:
-      - build
+      - main
   workflow_dispatch:
 
 jobs:
